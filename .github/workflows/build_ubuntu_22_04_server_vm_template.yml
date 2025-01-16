@@ -1,0 +1,37 @@
+
+name: Build Ubuntu 22.04 Server VM Template
+
+on:
+  workflow_dispatch:
+
+jobs:
+  packer:
+    runs-on: [self-hosted, linux, initial]
+    container: ghcr.io/rexonix-infra/packer:latest
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: Packer init
+        run: |
+          packer init ./shared/config.pkr.hcl
+
+      - name: Packer build
+        env:
+          PKR_VAR_vCenterServer: ${{ secrets.VCENTER_HOST }}
+          PKR_VAR_vCenterUsername: ${{ secrets.VCENTER_USER }}
+          PKR_VAR_vCenterPassword: ${{ secrets.VCENTER_PASS }}
+          PKR_VAR_vCenterInsecureConnection: ${{ secrets.VCENTER_VERIFY_SSL }}
+          PKR_VAR_vCenterDatacenterName: ${{ vars.VCENTER_DATACENTER_NAME }}
+          PKR_VAR_clusterName: ${{ vars.VCENTER_CLUSTER_NAME }}
+          PKR_VAR_datastoreName: ${{ vars.VCENTER_DATASTORE_NAME }}
+          PKR_VAR_isoPath: ${{ vars.UBUNTU_22_04_SERVER_X64_ISO_PATH }}
+          PKR_VAR_templateName: ${{ vars.UBUNTU_22_04_SERVER_X64_VM_TEMPLATE_NAME }}
+          PKR_VAR_libraryName: ${{ vars.VCENTER_PACKER_CONTENT_LIBRARY_NAME }}
+          PKR_VAR_portGroup: ${{ vars.VCENTER_PACKER_PORT_GROUP }}
+          PKR_VAR_vmName: "ubuntu2204server-temp" # temporary
+          PKR_VAR_vmFolder: "/" # temporary
+          PKR_VAR_vmUsername: "vagrant" # temporary
+          PKR_VAR_vmPassword: "vagrant" # temporary
+        run: |
+          cd packer/Ubuntu/22/04
+          packer build -force -only='vsphere-iso.base' .

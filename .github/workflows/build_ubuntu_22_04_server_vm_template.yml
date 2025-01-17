@@ -33,5 +33,5 @@ jobs:
           PKR_VAR_vmUsername: "vagrant" # temporary
           PKR_VAR_vmPassword: "vagrant" # temporary
         run: |
-          cd packer/Ubuntu/22/04
+          cd Ubuntu/22/04
           packer build -force -only='vsphere-iso.base' .

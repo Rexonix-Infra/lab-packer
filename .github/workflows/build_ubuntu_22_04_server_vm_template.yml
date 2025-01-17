@@ -20,7 +20,7 @@ jobs:
           PKR_VAR_vCenterServer: ${{ secrets.VCENTER_HOST }}
           PKR_VAR_vCenterUsername: ${{ secrets.VCENTER_USER }}
           PKR_VAR_vCenterPassword: ${{ secrets.VCENTER_PASS }}
-          PKR_VAR_vCenterInsecureConnection: ${{ secrets.VCENTER_VERIFY_SSL }}
+          PKR_VAR_vCenterInsecureConnection: ${{ secrets.VCENTER_INSECURE_CONNECTION }}
           PKR_VAR_vCenterDatacenterName: ${{ vars.VCENTER_DATACENTER_NAME }}
           PKR_VAR_clusterName: ${{ vars.VCENTER_CLUSTER_NAME }}
           PKR_VAR_datastoreName: ${{ vars.VCENTER_DATASTORE_NAME }}

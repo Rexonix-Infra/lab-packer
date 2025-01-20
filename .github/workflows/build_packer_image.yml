@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: ghcr.io/rexonix-infra/packer:latest
+  IMAGE_NAME: ghcr.io/rexonix-infra/lab-packer:latest
 
 jobs:
   docker-build-push:

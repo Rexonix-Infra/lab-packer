@@ -6,7 +6,7 @@ on:
 
 jobs:
   packer:
-    runs-on: [self-hosted, linux, initial]
+    runs-on: [self-hosted, linux, initial, rexonix-infra]
     container: ghcr.io/rexonix-infra/lab-packer:latest
     steps:
       - uses: actions/checkout@v4

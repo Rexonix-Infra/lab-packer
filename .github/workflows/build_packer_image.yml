@@ -9,7 +9,7 @@ env:
 
 jobs:
   docker-build-push:
-    runs-on: [self-hosted, linux, initial]
+    runs-on: [self-hosted, linux, initial, rexonix-infra]
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3

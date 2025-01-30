@@ -4,9 +4,6 @@ name: Build Custom Packer Docker Image
 on:
   workflow_dispatch:
 
-env:
-  IMAGE_NAME: ghcr.io/rexonix-infra/lab-packer:latest
-
 jobs:
   docker-build-push:
     runs-on: [self-hosted, linux, initial, rexonix-infra]
@@ -25,4 +22,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ env.IMAGE_NAME }}
+          tags: ${{ vars.PACKER_DOCKER_IMAGE }}
